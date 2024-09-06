@@ -111,6 +111,11 @@ def collage_pic(src:str, file_list):
 
 # collage_pic('.', ['a.jpg']*3)
 
+def filter_filetype(folder:str, filter_ext:list) -> list['file name']:
+    for file_path in os.listdir(folder):
+        ext = img_path[img_path.rfind('.')+1:]
+        if ext in filter_ext:
+            yield file_path
 
 
 """# work place"""
