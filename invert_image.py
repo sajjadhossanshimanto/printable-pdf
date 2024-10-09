@@ -119,6 +119,11 @@ def filter_filetype(folder:str, filter_ext:list) -> list['file name']:
         if ext in filter_ext:
             yield file_path
 
+def fix_crop(img):
+    # size for chemistry book -> cropped padding from all sides
+    return img[75:1650, 100:1300]
+    # # size for ame slides -> crop only a bit from buttom
+    # return img[900: , :]
 
 """# work place"""
 
@@ -144,10 +149,14 @@ for img_path in os.listdir(src):
         print(img_path)
         continue# uncomment while just need to collage
 
+
+        # img = cv2.imread(str(img_path.absolute()))
+        # fix_crop(img)
+
         img_bgr = cv2.imread(str(img_path.absolute()), 1)
-        
         img_bw = remove_colored_bg(img_bgr)
-        
+
+
         # print(img_des)
         cv2.imwrite(str(img_des.absolute()), img_bw)
     else:
