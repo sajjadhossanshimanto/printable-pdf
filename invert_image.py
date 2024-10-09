@@ -93,7 +93,7 @@ def key_num(x: str):
         - split the extextion
         - take digits from the rightmost dash ( _ )
     '''
-    return int(x.rsplit(".", 1)[0].rsplit("_", 1)[-1])
+    return int(str(x).rsplit(".", 1)[0].rsplit("_", 1)[-1])
     # return int(re.search('1.2_(\d*)', x).group(1))
 
 def collage_pic(src:str, file_list):
