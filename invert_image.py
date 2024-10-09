@@ -88,11 +88,13 @@ def save_img(img, dst):
 
 
 
-def key_num(x):
-    return int(re.search('1.2_(\d*)', x).group(1))
-
-# l = os.listdir('/content/drive/MyDrive/Sawn 1.2/black_white')
-# l.sort(key= key_num)
+def key_num(x: str):
+    '''logic: 
+        - split the extextion
+        - take digits from the rightmost dash ( _ )
+    '''
+    return int(x.rsplit(".", 1)[0].rsplit("_", 1)[-1])
+    # return int(re.search('1.2_(\d*)', x).group(1))
 
 def collage_pic(src:str, file_list):
     src = Path(src)
