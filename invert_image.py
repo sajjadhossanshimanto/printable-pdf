@@ -113,8 +113,6 @@ def collage_pic(src:str, file_list):
         collage = np.vstack(l)
         save_img(collage, f"{src}/collaged/{j}")
 
-# collage_pic('.', ['a.jpg']*3)
-
 def filter_filetype(folder:str, filter_ext:list) -> list['file name']:
     for file_path in os.listdir(folder):
         ext = img_path[img_path.rfind('.')+1:]
@@ -131,6 +129,7 @@ dst = src.joinpath('black_white')
 dst.mkdir(exist_ok=True)
 img_ext = ['jpg', 'png']
 
+l = []
 for img_path in os.listdir(src):
     ext = img_path[img_path.rfind('.')+1:]
     img_des = dst.joinpath(img_path)
@@ -139,16 +138,17 @@ for img_path in os.listdir(src):
 
     if img_path.is_file() and ext in img_ext:
         print(img_path)
-        img_bgr = cv2.imread(str(img_path.absolute()), 1)
-        # plt.imshow(img_bgr)
-        # plt.show()
-        img_bw = remove_colored_bg(img_bgr)
-        # plt.imshow(img_bw)
-        # plt.show()
+        l.append(img_path)
+        # continue# uncomment while just need to collage
 
+        img_bgr = cv2.imread(str(img_path.absolute()), 1)
+        
+        img_bw = remove_colored_bg(img_bgr)
+        
         # print(img_des)
         cv2.imwrite(str(img_des.absolute()), img_bw)
     # break
 
 
-
+l.sort(key=key_num)
+collage_pic(src, l)
