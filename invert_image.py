@@ -107,11 +107,11 @@ def collage_pic(src:str, file_list):
         print(src)
         l=[]
         for j in file_list[i:i+3]:
-            img = cv2.imread(f"{src}/{j}", 1)
+            img = cv2.imread(f"{src}{sep}{j}", 1)
             l.append(img)
 
         collage = np.vstack(l)
-        save_img(collage, f"{src}/collaged/{j}")
+        save_img(collage, f"{src}{sep}collaged{sep}{j}")
 
 def filter_filetype(folder:str, filter_ext:list) -> list['file name']:
     for file_path in os.listdir(folder):
@@ -123,8 +123,10 @@ def filter_filetype(folder:str, filter_ext:list) -> list['file name']:
 """# work place"""
 
 src = '/content/drive/MyDrive/Sawn 1.2'
+src = 'c3'
 
 src = Path(src)
+sep = src._flavour.sep
 dst = src.joinpath('black_white')
 dst.mkdir(exist_ok=True)
 img_ext = ['jpg', 'png']
