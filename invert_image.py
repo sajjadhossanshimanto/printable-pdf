@@ -133,6 +133,8 @@ img_ext = ['jpg', 'png']
 
 l = []
 for img_path in os.listdir(src):
+    l.append(img_path)# l should only cointain the file name
+
     ext = img_path[img_path.rfind('.')+1:]
     img_des = dst.joinpath(img_path)
     img_path = src.joinpath(img_path)
@@ -140,8 +142,7 @@ for img_path in os.listdir(src):
 
     if img_path.is_file() and ext in img_ext:
         print(img_path)
-        l.append(img_path)
-        # continue# uncomment while just need to collage
+        continue# uncomment while just need to collage
 
         img_bgr = cv2.imread(str(img_path.absolute()), 1)
         
@@ -149,8 +150,11 @@ for img_path in os.listdir(src):
         
         # print(img_des)
         cv2.imwrite(str(img_des.absolute()), img_bw)
+    else:
+        l.pop()
     # break
 
 
 l.sort(key=key_num)
+# print(l)
 collage_pic(src, l)
