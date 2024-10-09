@@ -97,6 +97,8 @@ def key_num(x: str):
     # return int(re.search('1.2_(\d*)', x).group(1))
 
 def collage_pic(src:str, file_list):
+    ''' file_list: user have to filter folder and other file type
+     as well as sort then according. as os.listdir returns unordered file list '''
     src = Path(src)
     src.joinpath('collaged').mkdir(exist_ok=True)
     src = str(Path(src).absolute())
