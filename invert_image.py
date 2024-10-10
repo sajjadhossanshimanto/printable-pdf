@@ -125,10 +125,20 @@ def fix_crop(img):
     # # size for ame slides -> crop only a bit from buttom
     # return img[900: , :]
 
+def replace_logo(img):
+    ''' changees are made inplace '''
+    # size for module book
+    img[1670:1780, 620:780] = [255, 255, 255]
+    return img
+
+
+
+
 """# work place"""
 
 src = '/content/drive/MyDrive/Sawn 1.2'
 src = 'c3'
+src = "mod 8"
 
 src = Path(src)
 sep = src._flavour.sep
@@ -147,14 +157,16 @@ for img_path in os.listdir(src):
 
     if img_path.is_file() and ext in img_ext:
         print(img_path)
-        continue# uncomment while just need to collage
+        # continue# uncomment while just need to collage
+        img = cv2.imread(str(img_path.absolute()))
 
 
-        # img = cv2.imread(str(img_path.absolute()))
         # fix_crop(img)
 
-        img_bgr = cv2.imread(str(img_path.absolute()), 1)
-        img_bw = remove_colored_bg(img_bgr)
+        img_bw = replace_logo(img)
+
+        # img_bgr = cv2.imread(str(img_path.absolute()), 1)# 1 is altually passed by default
+        # img_bw = remove_colored_bg(img)
 
 
         # print(img_des)
@@ -166,4 +178,4 @@ for img_path in os.listdir(src):
 
 l.sort(key=key_num)
 # print(l)
-collage_pic(src, l)
+# collage_pic(src, l)
